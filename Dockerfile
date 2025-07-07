@@ -1,4 +1,4 @@
-FROM node:18-alpine as build
+FROM node:18-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -7,13 +7,13 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN npm install --legacy-peer-deps --no-audit --no-fund
 
 # Copy all files
 COPY . .
 
 # Build the app
-RUN npm run build
+RUN npm run build -- --no-warnings
 
 # Production stage
 FROM nginx:alpine
