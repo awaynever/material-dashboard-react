@@ -83,8 +83,64 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
     return () => window.removeEventListener("resize", handleMiniSidenav);
   }, [dispatch, location]);
 
-  // Render all the routes from the routes.js (All the visible items on the Sidenav)
-  const renderRoutes = routes.map(({ type, name, icon, title, noCollapse, key, href, route }) => {
+  // Agrupar itens do menu
+  const groupedRoutes = {
+    relatorio: [],
+    outros: [],
+  };
+
+  // Separar os itens do menu em grupos
+  routes.forEach((route) => {
+    if (route.type === "route") {
+      // Itens do tipo "route" não aparecem no menu
+      return;
+    }
+
+    if (route.key === "relatorio") {
+      groupedRoutes.relatorio.unshift(route); // Coloca o item Relatório no início do grupo
+    } else if (route.key === "posts-recentes" || route.key === "assuntos") {
+      // Adiciona Posts Recentes e Assuntos como subitens de Relatório
+      groupedRoutes.relatorio.push(route);
+    } else {
+      groupedRoutes.outros.push(route);
+    }
+  });
+
+  // Renderizar os itens do menu
+  const renderRoutes = [];
+
+  // Renderizar o item Relatório e seus subitens
+  if (groupedRoutes.relatorio.length > 0) {
+    const relatorioItem = groupedRoutes.relatorio[0];
+    renderRoutes.push(
+      <NavLink key={relatorioItem.key} to={relatorioItem.route}>
+        <SidenavCollapse 
+          name={relatorioItem.name} 
+          icon={relatorioItem.icon} 
+          active={relatorioItem.key === collapseName} 
+        />
+      </NavLink>
+    );
+
+    // Renderizar os subitens de Relatório com indentação
+    for (let i = 1; i < groupedRoutes.relatorio.length; i++) {
+      const subItem = groupedRoutes.relatorio[i];
+      renderRoutes.push(
+        <NavLink key={subItem.key} to={subItem.route}>
+          <SidenavCollapse 
+            name={subItem.name} 
+            icon={subItem.icon} 
+            active={subItem.key === collapseName}
+            noCollapse={true}
+            style={{ marginLeft: "15px" }} 
+          />
+        </NavLink>
+      );
+    }
+  }
+
+  // Renderizar outros itens do menu
+  groupedRoutes.outros.forEach(({ type, name, icon, title, noCollapse, key, href, route }) => {
     let returnValue;
 
     if (type === "collapse") {
@@ -137,8 +193,12 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
       );
     }
 
-    return returnValue;
+    if (returnValue) {
+      renderRoutes.push(returnValue);
+    }
   });
+
+  // Fim da função renderRoutes
 
   return (
     <SidenavRoot
@@ -179,19 +239,6 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
         }
       />
       <List>{renderRoutes}</List>
-      <MDBox p={2} mt="auto">
-        <MDButton
-          component="a"
-          href="https://www.creative-tim.com/product/material-dashboard-pro-react"
-          target="_blank"
-          rel="noreferrer"
-          variant="gradient"
-          color={sidenavColor}
-          fullWidth
-        >
-          upgrade to pro
-        </MDButton>
-      </MDBox>
     </SidenavRoot>
   );
 }

@@ -87,10 +87,10 @@ export default function App() {
     }
   };
 
-  // Close sidenav when mouse leave mini sidenav
+  // Modificado para não recolher o menu quando o mouse sai
   const handleOnMouseLeave = () => {
     if (onMouseEnter) {
-      setMiniSidenav(dispatch, true);
+      // Removido: setMiniSidenav(dispatch, true);
       setOnMouseEnter(false);
     }
   };
@@ -155,7 +155,7 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Material Dashboard 2"
+              brandName="MonitorPol"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -167,7 +167,8 @@ export default function App() {
         {layout === "vr" && <Configurator />}
         <Routes>
           {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/dashboard" />} />
+          <Route path="/" element={<Navigate to="/authentication/login" />} />
+          <Route path="*" element={<Navigate to="/authentication/login" />} />
         </Routes>
       </ThemeProvider>
     </CacheProvider>
@@ -179,7 +180,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-            brandName="Material Dashboard 2"
+            brandName="MonitorPol"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}
@@ -191,7 +192,8 @@ export default function App() {
       {layout === "vr" && <Configurator />}
       <Routes>
         {getRoutes(routes)}
-        <Route path="*" element={<Navigate to="/dashboard" />} />
+        <Route path="/" element={<Navigate to="/authentication/login" />} />
+        <Route path="*" element={<Navigate to="/authentication/login" />} />
       </Routes>
     </ThemeProvider>
   );
