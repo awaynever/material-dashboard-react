@@ -12,8 +12,9 @@ RUN npm install --legacy-peer-deps --no-audit --no-fund
 # Copy all files
 COPY . .
 
-# Build the app
-RUN npm run build -- --no-warnings
+# Build the app - ignorando erros de linting
+ENV CI=true
+RUN npm run build
 
 # Production stage
 FROM nginx:alpine
