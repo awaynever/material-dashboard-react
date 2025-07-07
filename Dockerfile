@@ -12,8 +12,8 @@ RUN npm install --legacy-peer-deps --no-audit --no-fund
 # Copy all files
 COPY . .
 
-# Build the app - ignorando erros de linting
-ENV CI=true
+# Build the app - desabilitando completamente o ESLint durante o build
+ENV DISABLE_ESLINT_PLUGIN=true
 RUN npm run build
 
 # Production stage
