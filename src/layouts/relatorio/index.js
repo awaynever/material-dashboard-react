@@ -38,7 +38,7 @@ function Relatorio() {
   return (
     <CustomLayout>
       <MDBox pt={6} pb={3}>
-        {/* Seção 1 - Visão Geral */}
+        {/* Seção 1 - Relatório */}
         <Grid container spacing={6}>
           <Grid item xs={12}>
             <Card>
@@ -53,7 +53,7 @@ function Relatorio() {
                 coloredShadow="info"
               >
                 <MDTypography variant="h6" color="white">
-                  Visão Geral
+                  Relatório
                 </MDTypography>
               </MDBox>
               <MDBox p={3}>
