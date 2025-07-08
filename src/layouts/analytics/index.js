@@ -16,10 +16,6 @@ Coded by www.creative-tim.com
 // @mui material components
 import Grid from "@mui/material/Grid";
 import Card from "@mui/material/Card";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -32,7 +28,7 @@ import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatist
 import CustomLayout from "layouts/relatorio/components/CustomLayout";
 
 // React and chart.js
-import { useState } from "react";
+import React from "react";
 import { Bar, Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 
@@ -40,8 +36,8 @@ import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, T
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function Analytics() {
-  // Estado para filtro do gráfico de barras
-  const [timeFilter, setTimeFilter] = useState("mensal");
+  // Filtro fixo como mensal para o gráfico de barras
+  const timeFilter = "mensal";
 
   // Dados mockados para os cards de estatísticas
   const statsData = {
@@ -139,11 +135,7 @@ function Analytics() {
     },
   };
 
-  // Handler para mudança do filtro de tempo
-  const handleTimeFilterChange = (event) => {
-    setTimeFilter(event.target.value);
-    // Aqui você poderia atualizar os dados do gráfico com base no novo filtro
-  };
+  // Não é mais necessário um handler para mudança de filtro, pois o filtro é fixo
 
   return (
     <CustomLayout>
@@ -240,20 +232,11 @@ function Analytics() {
                   <MDTypography variant="h6" color="white">
                     Análise Temporal
                   </MDTypography>
-                  <FormControl sx={{ minWidth: 120, backgroundColor: 'white', borderRadius: '4px' }} size="small">
-                    <InputLabel id="time-filter-label">Período</InputLabel>
-                    <Select
-                      labelId="time-filter-label"
-                      id="time-filter"
-                      value={timeFilter}
-                      label="Período"
-                      onChange={handleTimeFilterChange}
-                    >
-                      <MenuItem value="semanal">Semanal</MenuItem>
-                      <MenuItem value="mensal">Mensal</MenuItem>
-                      <MenuItem value="trimestral">Trimestral</MenuItem>
-                    </Select>
-                  </FormControl>
+                  <MDBox sx={{ backgroundColor: 'white', borderRadius: '4px', padding: '6px 12px' }}>
+                    <MDTypography variant="button" fontWeight="medium" color="text">
+                      Período: Mensal
+                    </MDTypography>
+                  </MDBox>
                 </MDBox>
                 <MDBox p={3}>
                   <MDBox height="400px">
