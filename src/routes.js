@@ -40,6 +40,8 @@ import Login from "layouts/authentication/login";
 import Relatorio from "layouts/relatorio";
 import PostsRecentes from "layouts/posts-recentes";
 import Assuntos from "layouts/assuntos";
+import Monitoramento from "layouts/monitoramento";
+import ExibicaoPosts from "layouts/exibicao-posts";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -77,6 +79,22 @@ const routes = [
     icon: <Icon fontSize="small">topic</Icon>,
     route: "/assuntos",
     component: <Assuntos />,
+  },
+  {
+    type: "collapse",
+    name: "Monitoramento",
+    key: "monitoramento",
+    icon: <Icon fontSize="small">monitoring</Icon>,
+    route: "/monitoramento",
+    component: <Monitoramento />,
+  },
+  {
+    // Rota para exibição de posts de candidato ou hashtag (não aparece no menu)
+    type: "route",
+    name: "Exibição de Posts",
+    key: "exibicao-posts",
+    route: "/exibicao-posts/:type/:id",
+    component: <ExibicaoPosts />,
   },
 ];
 
