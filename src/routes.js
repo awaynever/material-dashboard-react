@@ -42,6 +42,7 @@ import PostsRecentes from "layouts/posts-recentes";
 import Assuntos from "layouts/assuntos";
 import Monitoramento from "layouts/monitoramento";
 import ExibicaoPosts from "layouts/exibicao-posts";
+import Analytics from "layouts/analytics";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -87,6 +88,14 @@ const routes = [
     icon: <Icon fontSize="small">monitoring</Icon>,
     route: "/monitoramento",
     component: <Monitoramento />,
+  },
+  {
+    type: "collapse",
+    name: "Analytics",
+    key: "analytics",
+    icon: <Icon fontSize="small">analytics</Icon>,
+    route: "/analytics",
+    component: <Analytics />,
   },
   {
     // Rota para exibição de posts de candidato ou hashtag (não aparece no menu)
