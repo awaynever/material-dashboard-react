@@ -182,6 +182,7 @@ function Monitoramento() {
                     Gerencie candidatos e hashtags para monitoramento
                   </MDTypography>
                 </MDBox>
+                <MDBox mb={4}></MDBox>
                 <Grid container spacing={3}>
                   {/* Seção de Candidatos */}
                   <Grid item xs={12} md={6}>
