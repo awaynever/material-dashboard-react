@@ -134,10 +134,10 @@ function CustomLayout({ children }) {
           </IconButton>
           <MDBox>
             <MDBox component="h4" fontWeight="bold" color="dark" mb={0}>
-              Relatório
+              MonitorPol
             </MDBox>
             <MDBox component="p" variant="button" color="text" mb={0}>
-              Visão geral de postagens e assuntos
+              Monitore cidades, perfis de Instagram e hashtags
             </MDBox>
           </MDBox>
         </Toolbar>
