@@ -168,6 +168,20 @@ function Monitoramento() {
                 </MDTypography>
               </MDBox>
               <MDBox p={3}>
+                <MDBox mb={2} display="flex" alignItems="center">
+                  <Icon
+                    sx={{
+                      fontWeight: "bold",
+                      color: ({ palette: { info } }) => info.main,
+                      mr: 1,
+                    }}
+                  >
+                    monitoring
+                  </Icon>
+                  <MDTypography variant="button" fontWeight="regular" color="text">
+                    Gerencie candidatos e hashtags para monitoramento
+                  </MDTypography>
+                </MDBox>
                 <Grid container spacing={3}>
                   {/* Seção de Candidatos */}
                   <Grid item xs={12} md={6}>
