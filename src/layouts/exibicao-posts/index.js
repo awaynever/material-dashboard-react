@@ -313,15 +313,19 @@ function ExibicaoPosts() {
                         </MDTypography>
                         {type === "candidato" ? (
                           <Grid container spacing={2}>
-                            <Grid item xs={12} sm={4}>
+                            <Grid item xs={12} sm={3}>
                               <MDTypography variant="body2" fontWeight="bold">Nome:</MDTypography>
                               <MDTypography variant="body2">{item.nome}</MDTypography>
                             </Grid>
-                            <Grid item xs={12} sm={4}>
+                            <Grid item xs={12} sm={3}>
+                              <MDTypography variant="body2" fontWeight="bold">Username:</MDTypography>
+                              <MDTypography variant="body2">{item.username}</MDTypography>
+                            </Grid>
+                            <Grid item xs={12} sm={3}>
                               <MDTypography variant="body2" fontWeight="bold">Partido:</MDTypography>
                               <MDTypography variant="body2">{item.partido}</MDTypography>
                             </Grid>
-                            <Grid item xs={12} sm={4}>
+                            <Grid item xs={12} sm={3}>
                               <MDTypography variant="body2" fontWeight="bold">Cargo:</MDTypography>
                               <MDTypography variant="body2">{item.cargo}</MDTypography>
                             </Grid>

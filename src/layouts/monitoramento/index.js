@@ -49,9 +49,9 @@ import { useNavigate } from "react-router-dom";
 function Monitoramento() {
   const navigate = useNavigate();
   const [candidatos, setCandidatos] = useState([
-    { id: 1, nome: "João Silva", partido: "PSD", cargo: "Prefeito" },
-    { id: 2, nome: "Maria Oliveira", partido: "PT", cargo: "Vereadora" },
-    { id: 3, nome: "Carlos Santos", partido: "PSDB", cargo: "Prefeito" }
+    { id: 1, nome: "João Silva", username: "@joaosilva", partido: "PSD", cargo: "Prefeito" },
+    { id: 2, nome: "Maria Oliveira", username: "@mariaoliveira", partido: "PT", cargo: "Vereadora" },
+    { id: 3, nome: "Carlos Santos", username: "@carlossantos", partido: "PSDB", cargo: "Prefeito" }
   ]);
   
   const [hashtags, setHashtags] = useState([
@@ -60,7 +60,7 @@ function Monitoramento() {
     { id: 3, texto: "#cidademelhor" }
   ]);
   
-  const [novoCandidato, setNovoCandidato] = useState({ nome: "", partido: "", cargo: "" });
+  const [novoCandidato, setNovoCandidato] = useState({ nome: "", partido: "", cargo: "", username: "" });
   const [novaHashtag, setNovaHashtag] = useState("");
   const [openCandidatoDialog, setOpenCandidatoDialog] = useState(false);
   const [openHashtagDialog, setOpenHashtagDialog] = useState(false);
@@ -68,7 +68,7 @@ function Monitoramento() {
   
   // Handlers para candidatos
   const handleOpenCandidatoDialog = () => {
-    setNovoCandidato({ nome: "", partido: "", cargo: "" });
+    setNovoCandidato({ nome: "", partido: "", cargo: "", username: "" });
     setOpenCandidatoDialog(true);
   };
   
@@ -85,9 +85,16 @@ function Monitoramento() {
   };
   
   const handleAddCandidato = () => {
-    if (novoCandidato.nome && novoCandidato.partido && novoCandidato.cargo) {
+    if (novoCandidato.nome && novoCandidato.partido && novoCandidato.cargo && novoCandidato.username) {
       const newId = candidatos.length > 0 ? Math.max(...candidatos.map(c => c.id)) + 1 : 1;
-      setCandidatos([...candidatos, { id: newId, ...novoCandidato }]);
+      const novoCandidatoObj = {
+        id: newId,
+        nome: novoCandidato.nome,
+        partido: novoCandidato.partido,
+        cargo: novoCandidato.cargo,
+        username: novoCandidato.username.startsWith("@") ? novoCandidato.username : `@${novoCandidato.username}`
+      };
+      setCandidatos([...candidatos, novoCandidatoObj]);
       setOpenCandidatoDialog(false);
     }
   };
@@ -225,9 +232,10 @@ function Monitoramento() {
                                 <ListItemIcon>
                                   <Icon>person</Icon>
                                 </ListItemIcon>
-                                <ListItemText
-                                  primary={candidato.nome}
-                                  secondary={`${candidato.partido} | ${candidato.cargo}`}
+                                <ListItemText 
+                                  primary={candidato.nome} 
+                                  secondary={candidato.username}
+                                  primaryTypographyProps={{ fontWeight: "medium" }}
                                 />
                                 <ListItemSecondaryAction>
                                   <IconButton 
@@ -348,6 +356,16 @@ function Monitoramento() {
               name="nome"
               value={novoCandidato.nome}
               onChange={handleCandidatoChange}
+            />
+            <MDInput
+              margin="dense"
+              label="Username do Instagram"
+              type="text"
+              fullWidth
+              name="username"
+              value={novoCandidato.username}
+              onChange={handleCandidatoChange}
+              placeholder="@username"
             />
             <MDInput
               margin="dense"
