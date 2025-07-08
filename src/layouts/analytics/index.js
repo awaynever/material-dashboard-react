@@ -36,8 +36,8 @@ import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, T
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 function Analytics() {
-  // Filtro fixo como mensal para o gráfico de barras
-  const timeFilter = "mensal";
+  // Filtro fixo para o gráfico de barras
+  const timeFilter = "ultimos30dias";
 
   // Dados mockados para os cards de estatísticas
   const statsData = {
@@ -85,7 +85,7 @@ function Analytics() {
       },
       title: {
         display: true,
-        text: 'Distribuição de Sentimentos por Semana',
+        text: 'Distribuição de Sentimentos por Semana - Últimos 30 dias',
       },
     },
     scales: {
@@ -234,7 +234,7 @@ function Analytics() {
                   </MDTypography>
                   <MDBox sx={{ backgroundColor: 'white', borderRadius: '4px', padding: '6px 12px' }}>
                     <MDTypography variant="button" fontWeight="medium" color="text">
-                      Período: Mensal
+                      Período: Últimos 30 dias
                     </MDTypography>
                   </MDBox>
                 </MDBox>
